@@ -1,10 +1,14 @@
 'use strict';
 
 module.exports = {
+  /**
+     *  @param {import('sequelize').QueryInterface} queryInterface
+     *  @param {import('sequelize').DataTypes} Sequelize
+     * */
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('blog_posts', {
       id: {
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -16,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       user_id: {
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'users',
@@ -26,12 +30,10 @@ module.exports = {
       published: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: false,
       },
       updated: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: false,
       },
     });
   },
