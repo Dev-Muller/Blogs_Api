@@ -18,6 +18,13 @@ module.exports= (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     image: DataTypes.STRING
   }, {tableName: 'users', timestamps: false});
+
+  User.associate = function(models) {
+    User.hasMany(models.Post, {
+      foreignKey: 'user_id',
+      as: 'posts'
+    });
+  };
   
   return User;
 }
