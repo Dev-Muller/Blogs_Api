@@ -13,18 +13,18 @@ module.exports= (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    display_name: DataTypes.STRING,
+    displayName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     image: DataTypes.STRING
-  }, {tableName: 'users', timestamps: false});
+  }, {tableName: 'users', timestamps: false, underscored: true});
 
-  User.associate = function(models) {
-    User.hasMany(models.Post, {
-      foreignKey: 'user_id',
-      as: 'posts'
-    });
-  };
+  // User.associate = function(models) {
+  //   User.hasMany(models.Post, {
+  //     foreignKey: 'user_id',
+  //     as: 'posts'
+  //   });
+  // };
   
   return User;
 }

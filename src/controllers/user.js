@@ -26,8 +26,8 @@ const createUser = async (req, res) => {
     const { displayName, email, password, image } = req.body;
 
     const validEmail = await UserService.getByEmail(email);
-
-    if (!validEmail) {
+    
+    if (validEmail) {
       return res.status(409).json({
         message: 'User already registered',
       });
@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
     const user = await UserService.createUser(displayName, email, password, image);
     const payload = { data: user };
     const token = createToken(payload);
-    return res.status(201).json(token);
+    return res.status(201).json({ token });
   } catch (err) {
     res.status(400).json({ error: err });
   }
