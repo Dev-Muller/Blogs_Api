@@ -1,3 +1,5 @@
+const { verifyToken } = require('../auth/authfunctions');
+
 const validateFields = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -49,4 +51,22 @@ const passwordLenght = (req, res, next) => {
   next();
 };
 
-module.exports = { validateFields, invalidFields, displayNameLenght, validEmail, passwordLenght };
+const validateToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const newToken = token.replace('Bearer ', '');
+    if (!newToken) {
+    return res.status(401).json({
+        message: 'Token not found',
+      });
+    }
+    const verify = await verifyToken(newToken);
+    req.user = verify;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
+};
+
+module.exports = {
+  validateFields, invalidFields, displayNameLenght, validEmail, passwordLenght, validateToken };

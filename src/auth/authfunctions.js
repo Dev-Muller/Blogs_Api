@@ -5,6 +5,6 @@ const jwtConfig = { algorithm: 'HS256', expiresIn: '15m' };
 
 const createToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 
-const getPayload = (token) => jwt.verify(token, secret);
+const verifyToken = (token) => jwt.verify(token, secret);
 
-module.exports = { createToken, getPayload };
+module.exports = { createToken, verifyToken };

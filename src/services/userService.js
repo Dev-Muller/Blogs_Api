@@ -7,8 +7,11 @@ const createUser = (displayName, email, password, image) => User
 
 const getByEmail = (email) => User.findOne({ where: { email } });
 
+const getAllUsers = async () => User.findAll({ attributes: { exclude: 'password' } });
+
 module.exports = {
   findOne,
   createUser,
   getByEmail,
+  getAllUsers,
 };
