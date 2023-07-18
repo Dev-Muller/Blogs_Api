@@ -2,6 +2,8 @@ const express = require('express');
 
 const { findOneUser, createUser, getAllUsers, getUserById } = require('../controllers/user');
 
+const { createCategory } = require('../controllers/category');
+
 const {
   validateFields,
   invalidFields,
@@ -9,6 +11,7 @@ const {
   validEmail,
   passwordLenght,
   validateToken,
+  validateCategoryName,
 } = require('../middlewares/user');
 
 const apiRoutes = express.Router();
@@ -20,5 +23,7 @@ apiRoutes.post('/user', displayNameLenght, validEmail, passwordLenght, createUse
 apiRoutes.get('/user', validateToken, getAllUsers);
 
 apiRoutes.get('/user/:id', validateToken, getUserById);
+
+apiRoutes.post('/categories', validateToken, validateCategoryName, createCategory);
 
 module.exports = apiRoutes;

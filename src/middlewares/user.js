@@ -68,5 +68,22 @@ const validateToken = async (req, res, next) => {
   }
 };
 
+const validateCategoryName = (req, res, next) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({
+      message: '"name" is required',
+    });
+  }
+  next();
+};
+
 module.exports = {
-  validateFields, invalidFields, displayNameLenght, validEmail, passwordLenght, validateToken };
+  validateFields,
+  invalidFields,
+  displayNameLenght,
+  validEmail,
+  passwordLenght,
+  validateToken,
+  validateCategoryName,
+};
