@@ -54,7 +54,7 @@ const passwordLenght = (req, res, next) => {
 const validateToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    const newToken = token.replace('Bearer ', '');
+    const newToken = token.includes('Bearer') ? token.replace('Bearer ', '') : token;
     if (!newToken) {
     return res.status(401).json({
         message: 'Token not found',

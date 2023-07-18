@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { findOneUser, createUser, getAllUsers } = require('../controllers/user');
+const { findOneUser, createUser, getAllUsers, getUserById } = require('../controllers/user');
 
 const {
   validateFields,
@@ -18,5 +18,7 @@ apiRoutes.post('/login', validateFields, invalidFields, findOneUser);
 apiRoutes.post('/user', displayNameLenght, validEmail, passwordLenght, createUser);
 
 apiRoutes.get('/user', validateToken, getAllUsers);
+
+apiRoutes.get('/user/:id', validateToken, getUserById);
 
 module.exports = apiRoutes;
