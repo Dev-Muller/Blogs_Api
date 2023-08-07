@@ -19,7 +19,7 @@ module.exports = {
       content: {
         type: Sequelize.STRING,
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'user_id',

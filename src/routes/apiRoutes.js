@@ -4,6 +4,8 @@ const { findOneUser, createUser, getAllUsers, getUserById } = require('../contro
 
 const { createCategory, getAllCategories } = require('../controllers/category');
 
+const { createPost } = require('../controllers/postCategory');
+
 const {
   validateFields,
   invalidFields,
@@ -13,6 +15,8 @@ const {
   validateToken,
   validateCategoryName,
 } = require('../middlewares/user');
+
+const { validatePostContent } = require('../middlewares/posts');
 
 const apiRoutes = express.Router();
 
@@ -27,5 +31,7 @@ apiRoutes.get('/user/:id', validateToken, getUserById);
 apiRoutes.post('/categories', validateToken, validateCategoryName, createCategory);
 
 apiRoutes.get('/categories', validateToken, getAllCategories);
+
+apiRoutes.post('/post', validateToken, validatePostContent, createPost);
 
 module.exports = apiRoutes;
