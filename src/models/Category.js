@@ -16,11 +16,5 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {tableName: 'categories', timestamps: false, underscored: true});
 
-  // Category.associate = function(models) {
-  //   Category.hasMany(models.Post, {
-  //     foreignKey: 'category_id',
-  //     as: 'categories'
-  //   });
-  // };
   return Category;
 };
