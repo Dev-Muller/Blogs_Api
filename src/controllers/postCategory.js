@@ -36,8 +36,24 @@ const getPostById = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const { data } = req.user;
+    const post = await postCategoryService.updatePost(id, title, content, data.id);
+    if (post.message) {
+      return res.status(401).json(post);
+    }
+    return res.status(200).json(post);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+};
+
 module.exports = {
   createPost,
   findAllPosts,
   getPostById,
+  updatePost,
 };
