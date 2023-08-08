@@ -4,7 +4,7 @@ const { findOneUser, createUser, getAllUsers, getUserById } = require('../contro
 
 const { createCategory, getAllCategories } = require('../controllers/category');
 
-const { createPost, findAllPosts } = require('../controllers/postCategory');
+const { createPost, findAllPosts, getPostById } = require('../controllers/postCategory');
 
 const {
   validateFields,
@@ -35,5 +35,7 @@ apiRoutes.get('/categories', validateToken, getAllCategories);
 apiRoutes.post('/post', validateToken, validatePostContent, createPost);
 
 apiRoutes.get('/post', validateToken, findAllPosts);
+
+apiRoutes.get('/post/:id', validateToken, getPostById);
 
 module.exports = apiRoutes;
