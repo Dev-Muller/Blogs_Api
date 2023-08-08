@@ -4,8 +4,12 @@ const { findOneUser, createUser, getAllUsers, getUserById } = require('../contro
 
 const { createCategory, getAllCategories } = require('../controllers/category');
 
-const { createPost, findAllPosts, getPostById,
-  updatePost } = require('../controllers/postCategory');
+const { createPost,
+  findAllPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+} = require('../controllers/postCategory');
 
 const {
   validateFields,
@@ -17,7 +21,11 @@ const {
   validateCategoryName,
 } = require('../middlewares/user');
 
-const { validatePostContent, validatePostTitleAndContent } = require('../middlewares/posts');
+const {
+  validatePostContent,
+  validatePostTitleAndContent,
+  validateUserPost,
+} = require('../middlewares/posts');
 
 const apiRoutes = express.Router();
 
@@ -40,5 +48,7 @@ apiRoutes.get('/post', validateToken, findAllPosts);
 apiRoutes.get('/post/:id', validateToken, getPostById);
 
 apiRoutes.put('/post/:id', validateToken, validatePostTitleAndContent, updatePost);
+
+apiRoutes.delete('/post/:id', validateToken, validateUserPost, deletePost);
 
 module.exports = apiRoutes;

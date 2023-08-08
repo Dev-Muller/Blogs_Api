@@ -1,3 +1,5 @@
+const postCategoryService = require('../services/postCategoryService');
+
 const validatePostContent = (req, res, next) => {
   const { title, content, categoryIds } = req.body;
   if (!title || !content || !categoryIds) {
@@ -18,4 +20,19 @@ const validatePostTitleAndContent = (req, res, next) => {
   next();
 };
 
-module.exports = { validatePostContent, validatePostTitleAndContent };
+const validateUserPost = async (req, res, next) => {
+  const { id } = req.params;
+  const { data } = req.user;
+  const post = await postCategoryService.getPostById(id);
+  if (post.message) {
+    return res.status(404).json(post);
+  }
+  if (post.userId !== data.id) {
+    return res.status(401).json({
+      message: 'Unauthorized user',
+    });
+  }
+  next();
+};
+
+module.exports = { validatePostContent, validatePostTitleAndContent, validateUserPost };
