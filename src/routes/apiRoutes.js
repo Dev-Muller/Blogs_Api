@@ -1,6 +1,12 @@
 const express = require('express');
 
-const { findOneUser, createUser, getAllUsers, getUserById } = require('../controllers/user');
+const {
+  findOneUser,
+  createUser,
+  getAllUsers,
+  getUserById,
+  deleteUser,
+} = require('../controllers/user');
 
 const { createCategory, getAllCategories } = require('../controllers/category');
 
@@ -50,5 +56,7 @@ apiRoutes.get('/post/:id', validateToken, getPostById);
 apiRoutes.put('/post/:id', validateToken, validatePostTitleAndContent, updatePost);
 
 apiRoutes.delete('/post/:id', validateToken, validateUserPost, deletePost);
+
+apiRoutes.delete('/user/me', validateToken, deleteUser);
 
 module.exports = apiRoutes;

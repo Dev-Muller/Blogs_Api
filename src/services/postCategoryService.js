@@ -77,7 +77,6 @@ const updatePost = async (id, title, content, userId) => {
 
 const deletePost = async (id, userId) => {
   const findPostUserId = await BlogPost.findOne({ where: { id, userId } });
-  console.log(findPostUserId);
   if (!findPostUserId) {
     return { message: 'Unauthorized user' };
   }

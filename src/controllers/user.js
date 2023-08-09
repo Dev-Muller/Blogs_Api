@@ -16,7 +16,6 @@ const findOneUser = async (req, res) => {
     return res.status(200).json({
       token });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ error: err });
   }
 };
@@ -67,9 +66,16 @@ const getUserById = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { data } = req.user;
+  await UserService.deleteUser(data.id);
+  return res.status(204).json({});
+};
+
 module.exports = {
   findOneUser,
   createUser,
   getAllUsers,
   getUserById,
+  deleteUser,
 };
