@@ -61,10 +61,22 @@ const deletePost = async (req, res) => {
     return res.status(204).json({});
 };
 
+const searchPost = async (req, res) => {
+  try {
+    const { q } = req.query;
+    console.log('log no q:', q);
+    const post = await postCategoryService.searchPost(q);
+    return res.status(200).json(post);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+};
+
 module.exports = {
   createPost,
   findAllPosts,
   getPostById,
   updatePost,
   deletePost,
+  searchPost,
 };

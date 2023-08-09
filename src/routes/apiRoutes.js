@@ -15,6 +15,7 @@ const { createPost,
   getPostById,
   updatePost,
   deletePost,
+  searchPost,
 } = require('../controllers/postCategory');
 
 const {
@@ -50,6 +51,8 @@ apiRoutes.get('/categories', validateToken, getAllCategories);
 apiRoutes.post('/post', validateToken, validatePostContent, createPost);
 
 apiRoutes.get('/post', validateToken, findAllPosts);
+
+apiRoutes.get('/post/search', validateToken, searchPost);
 
 apiRoutes.get('/post/:id', validateToken, getPostById);
 
